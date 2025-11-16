@@ -1,21 +1,22 @@
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE IF NOT EXISTS categories (
     id BIGSERIAL PRIMARY KEY,
-    username VARCHAR(100) NOT NULL UNIQUE,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    full_name VARCHAR(255),
+    name VARCHAR(255) NOT NULL UNIQUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS tasks (
+CREATE TABLE IF NOT EXISTS properties (
     id BIGSERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     description TEXT,
-    assignee_id BIGINT,
+    price DECIMAL(15,2) NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    bedrooms INTEGER,
+    bathrooms INTEGER,
+    size INTEGER,
     status VARCHAR(50) NOT NULL,
-    priority VARCHAR(50) NOT NULL,
-    due_date TIMESTAMP,
+    category_id BIGINT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_assignee_id FOREIGN KEY (assignee_id) REFERENCES users(id)
+    CONSTRAINT fk_category_id FOREIGN KEY (category_id) REFERENCES categories(id)
 );
