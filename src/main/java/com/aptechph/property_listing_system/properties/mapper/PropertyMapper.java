@@ -6,7 +6,7 @@ import com.aptechph.property_listing_system.properties.model.Property;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = CategoryMapper.class)
 public interface PropertyMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "category", ignore = true)
