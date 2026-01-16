@@ -1,21 +1,34 @@
 package com.aptechph.financial_dashboard.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
-public class LoanDto {
+public class LoanRequest {
 
-    private Long id;
+    @NotBlank
     private String title;
+
+    @NotNull
+    @Positive
     private BigDecimal totalAmount;
-    private BigDecimal paidAmount;
+
+    @NotNull
+    @Positive
     private BigDecimal monthlyPayment;
+
+    @NotNull
     private LocalDate dueDate;
+
+    @NotNull
+    @Positive
     private BigDecimal interestRate;
+
+    @NotBlank
     private String lender;
-    private String status;
-    private BigDecimal remainingAmount;
 }
