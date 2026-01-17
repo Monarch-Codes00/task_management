@@ -21,7 +21,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Map<String, Object>> handleRuntimeException(RuntimeException ex) {
         log.error("Runtime exception: {}", ex.getMessage(), ex);
-        return buildErrorResponse(HttpStatus.BAD_REQUEST, "Bad Request", ex.getMessage());
+        // Check if it's a validation or business logic error (400) vs system error (500)
+        if (ex.getMessage() != null && (ex.getMessage().contains("validation") ||
+            ex.getMessage().contains("not found") || ex.getMessage().contains("already exists"))) {
+            return buildErrorResponse(HttpStatus.BAD_REQUEST, "Bad Request", ex.getMessage());
+        } else {
+            return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error",
+                "An unexpected error occurred. Please try again later.");
+        }
     }
 
     @ExceptionHandler(AuthenticationException.class)
