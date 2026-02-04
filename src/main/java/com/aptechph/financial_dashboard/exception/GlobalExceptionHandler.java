@@ -1,4 +1,4 @@
-package com.aptechph.financial_dashboard.exception;
+2package com.aptechph.financial_dashboard.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
